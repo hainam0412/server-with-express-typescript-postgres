@@ -1,6 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '@module/sequelize-instance';
 import { PostInterface } from './post.interface';
+import { PostType } from './post.type';
 
 export class Post extends Model implements PostInterface {
     declare id: number;
@@ -9,6 +10,8 @@ export class Post extends Model implements PostInterface {
     declare content: string;
     declare author: string;
     declare tag: string[];
+    declare type: PostType;
+    declare url: string | null;
 }
 
 Post.init(
@@ -37,6 +40,16 @@ Post.init(
         },
         tag: {
             type: new DataTypes.ARRAY(DataTypes.STRING),
+            allowNull: true,
+            defaultValue: null,
+        },
+        type: {
+            type: new DataTypes.ENUM(...Object.values(PostType)),
+            allowNull: false,
+            defaultValue: PostType.default,
+        },
+        url: {
+            type: new DataTypes.STRING(),
             allowNull: true,
             defaultValue: null,
         },
