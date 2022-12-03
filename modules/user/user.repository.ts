@@ -3,11 +3,11 @@ import { UserRepositoryInterface } from './user.interface';
 import { User } from './user.model';
 
 export class UserRepository implements UserRepositoryInterface {
-    async findAll(t: User): Promise<User[]> {
+    async findAll(): Promise<User[]> {
         return await User.findAll();
     }
 
-    async delete(t: User): Promise<any> {}
+    async delete(id: number): Promise<any> {}
 
     async getUserById(id: number): Promise<User | null> {
         return await User.findOne({ where: { id } });

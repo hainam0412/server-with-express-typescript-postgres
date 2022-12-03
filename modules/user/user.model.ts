@@ -10,7 +10,6 @@ export class User extends Model implements UserInterface {
     declare email: string;
     declare password: string;
     declare roles: Role;
-
     private salt: string;
 
     public validPassword(password: string): boolean {
