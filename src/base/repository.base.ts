@@ -9,6 +9,9 @@ export class BaseRepository {
 
     public getErrorMessage(error: any) {
         this.logger.write('db', JSON.stringify(error));
+        if ('ERR_INVALID_ARG_TYPE' === error.code) {
+            throw 'Wrong parameter';
+        }
 
         throw error.errors[0].message;
     }
