@@ -7,12 +7,10 @@ dotenv.config({
     path: resolve(__dirname, '../.env'),
 });
 
-import { db } from './db';
+import { syncModels } from './db';
 
 const app: Express = express();
 const port = process.env.PORT;
-
-db.connect();
 
 app.use(bodyParser.json());
 app.use(
@@ -21,10 +19,13 @@ app.use(
     })
 );
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('App is currently running');
-});
+(async () => {
+    await syncModels({ force: true });
+    app.get('/', (req: Request, res: Response) => {
+        res.send('App is currently running');
+    });
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+    app.listen(port, () => {
+        console.log(`Server is running on http://localhost:${port}`);
+    });
+})();
