@@ -1,7 +1,7 @@
 import { Role } from '@type/role.type';
 import { User } from './user.model';
 
-export interface UserRepositoryInterface extends BaseRepositoryInterface<User> {
+export interface UserRepositoryInterface extends RepositoryInterface<User> {
     getUserById(id: number): Promise<User | null>;
 }
 

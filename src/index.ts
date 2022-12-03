@@ -3,7 +3,7 @@ import express, { Express, Request, Response, Application } from 'express';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
 import bodyParser from 'body-parser';
-import { AbstractController } from './modules/abstract.controller';
+import { BaseController } from './base/controller.base';
 import { UserController } from './modules/user/user.controller';
 
 dotenv.config({
@@ -17,7 +17,7 @@ const port = Number(process.env.PORT);
 class App {
     public app: Application;
 
-    constructor(controllers: AbstractController[]) {
+    constructor(controllers: BaseController[]) {
         this.app = express();
         this.initializeMiddleWares().then(() => {
             this.initializeControllers(controllers);
@@ -37,10 +37,10 @@ class App {
                 extended: true,
             })
         );
-        await syncModels({ force: true });
+        await syncModels();
     }
 
-    private initializeControllers(controllers: AbstractController[]) {
+    private initializeControllers(controllers: BaseController[]) {
         controllers.forEach((controller) => {
             this.app.use('/', controller.router);
         });

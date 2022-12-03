@@ -25,7 +25,7 @@ export class User extends Model implements UserInterface {
 User.init(
     {
         id: {
-            type: DataTypes.INTEGER.UNSIGNED,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
@@ -37,6 +37,9 @@ User.init(
             type: new DataTypes.STRING(128),
             allowNull: false,
             unique: true,
+            validate: {
+                isEmail: true,
+            },
         },
         password: {
             type: DataTypes.STRING(),

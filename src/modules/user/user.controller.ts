@@ -1,19 +1,15 @@
 import { Request, Response, Router } from 'express';
-import { User } from './user.model';
-import { AbstractController } from '@module/abstract.controller';
-import { UserRepository } from './user.repository';
+import { BaseController } from '@base/controller.base';
 import { UserMapper } from './user.mapper';
 
-export class UserController extends AbstractController {
+export class UserController extends BaseController {
     public path = '/user';
     public router = Router();
-    private userRepository: UserRepository;
     private userMapper: UserMapper;
 
     constructor() {
         super();
         this.initializeRoutes();
-        this.userRepository = new UserRepository();
         this.userMapper = new UserMapper();
     }
 
@@ -22,15 +18,23 @@ export class UserController extends AbstractController {
         this.router.post(this.route('create'), this.createUser);
     }
 
-    getAllUsers = async  (req: Request, res: Response) => {
-        res.send(await this.userMapper.findAll());
+    getAllUsers = async (req: Request, res: Response) => {
+        try {
+            res.send(await this.userMapper.findAll());
+        } catch (error) {
+            this.log(error);
+        }
     };
 
     createUser = async (req: Request, res: Response) => {
-        await this.userRepository.create(req.body);
+        try {
+            const user = await this.userMapper.create(req.body);
 
-        return res.json({
-            name: req.body.name,
-        });
+            return res.json(user).status(201);
+        } catch (error) {
+            this.log(error);
+
+            return res.status(401).send(error);
+        }
     };
 }

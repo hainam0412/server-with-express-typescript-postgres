@@ -37,6 +37,10 @@
   "_moduleAliases": {
     "@type": "dist/type",
     "@module": "dist/modules",
-    "@user": "dist/modules/user"
+    "@user": "dist/modules/user",
+    "@utils": "dist/utils",
+    "@base": "dist/base",
+    "@exception": "dist/exception",
+    "@interface": "dist/interface"
   }
 }
