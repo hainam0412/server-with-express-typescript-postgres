@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Response, Router } from 'express';
 import { Logger } from '@utils/logger';
 
 export class BaseController {
@@ -17,5 +17,9 @@ export class BaseController {
 
     public log(message: any) {
         this.logger.write('server', message);
+    }
+
+    public sendError(res: Response, message: unknown, status: number = 404) {
+        return res.status(status).json({ message });
     }
 }

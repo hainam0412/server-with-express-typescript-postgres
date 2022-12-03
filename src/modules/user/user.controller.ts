@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { BaseController } from '@base/controller.base';
 import { UserMapper } from './user.mapper';
+import { HTTP } from '@type/http/http.status.type';
 
 export class UserController extends BaseController {
     public path = '/user';
@@ -30,11 +31,11 @@ export class UserController extends BaseController {
         try {
             const user = await this.userMapper.create(req.body);
 
-            return res.json(user).status(201);
+            return res.json(user).status(HTTP.Created);
         } catch (error) {
             this.log(error);
 
-            return res.status(401).send(error);
+            return this.sendError(res, error, HTTP.Forbidden);
         }
     };
 }
