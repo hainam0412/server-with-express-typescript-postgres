@@ -1,12 +1,12 @@
 import { BaseScrapper } from '@base/scrapper.base';
-import { PostInterface } from './post.interface';
+import { PostDto } from './post.dto';
 import { PostType } from './post.type';
 import { TRAVEL_POST_SCRAPPING_URL } from './scrapping/scrapping.url';
 
 export class PostScrapper extends BaseScrapper {
-    public async postScrapping(): Promise<PostInterface[]> {
+    public async travelPostScrapping(): Promise<PostDto[]> {
         const $ = await this.getHtml(TRAVEL_POST_SCRAPPING_URL);
-        const posts: PostInterface[] = [];
+        const posts: PostDto[] = [];
 
         $('article.elementor-post.elementor-grid-item').each((index, item) => {
             const postElement = $(item);

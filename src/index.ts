@@ -11,7 +11,7 @@ dotenv.config({
 });
 
 import { syncModels } from './db';
-import { PostScrapper } from '@module/post/post.scrapper';
+import { startCronJob } from './cron-job';
 
 const port = Number(process.env.PORT);
 
@@ -32,14 +32,14 @@ class App {
     }
 
     private async initializeMiddleWares() {
-
         this.app.use(bodyParser.json());
         this.app.use(
             bodyParser.urlencoded({
                 extended: true,
             })
         );
-        await syncModels({ force: true });
+        await syncModels();
+        startCronJob();
     }
 
     private initializeControllers(controllers: BaseController[]) {

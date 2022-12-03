@@ -1,8 +1,9 @@
-import { IsString, IsArray } from 'class-validator';
+import { IsString, IsArray, IsEnum } from 'class-validator';
+import { PostType } from './post.type';
 
 export class PostDto {
     @IsString()
-    public id: number;
+    public id?: number;
 
     @IsString()
     public title: string;
@@ -18,4 +19,9 @@ export class PostDto {
 
     @IsArray()
     public tag: string[];
+
+    @IsEnum(PostType)
+    type: PostType;
+
+    url: string | null;
 }
