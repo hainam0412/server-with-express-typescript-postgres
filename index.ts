@@ -1,10 +1,10 @@
+import 'module-alias/register';
 import express, { Express, Request, Response, Application } from 'express';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
 import bodyParser from 'body-parser';
 import { AbstractController } from './modules/abstract.controller';
 import { UserController } from './modules/user/user.controller';
-import 'module-alias/register';
 
 dotenv.config({
     path: resolve(__dirname, '../.env'),
@@ -48,5 +48,4 @@ class App {
 }
 
 const app = new App([new UserController()]);
-
 app.listen();
