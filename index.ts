@@ -1,31 +1,51 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express, Request, Response, Application } from 'express';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
 import bodyParser from 'body-parser';
+import { AbstractController } from './controller/abstract.controller';
 
 dotenv.config({
     path: resolve(__dirname, '../.env'),
 });
 
 import { syncModels } from './db';
+import { UserController } from './controller/user.controller';
 
-const app: Express = express();
-const port = process.env.PORT;
+const port = Number(process.env.PORT);
 
-app.use(bodyParser.json());
-app.use(
-    bodyParser.urlencoded({
-        extended: true,
-    })
-);
+class App {
+    public app: Application;
 
-(async () => {
-    await syncModels({ force: true });
-    app.get('/', (req: Request, res: Response) => {
-        res.send('App is currently running');
-    });
+    constructor(controllers: AbstractController[]) {
+        this.app = express();
+        this.initializeMiddleWares().then(() => {
+            this.initializeControllers(controllers);
+        });
+    }
 
-    app.listen(port, () => {
-        console.log(`Server is running on http://localhost:${port}`);
-    });
-})();
+    public listen() {
+        this.app.listen(port, () => {
+            console.log(`Server is running on http://localhost:${port}`);
+        });
+    }
+
+    private async initializeMiddleWares() {
+        this.app.use(bodyParser.json());
+        this.app.use(
+            bodyParser.urlencoded({
+                extended: true,
+            })
+        );
+        await syncModels({ force: true });
+    }
+
+    private initializeControllers(controllers: AbstractController[]) {
+        controllers.forEach((controller) => {
+            this.app.use('/', controller.router);
+        });
+    }
+}
+
+const app = new App([new UserController()]);
+
+app.listen();
