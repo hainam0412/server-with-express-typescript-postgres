@@ -37,7 +37,7 @@ class App {
                 extended: true,
             })
         );
-        await syncModels();
+        await syncModels({ force: true });
     }
 
     private initializeControllers(controllers: BaseController[]) {
