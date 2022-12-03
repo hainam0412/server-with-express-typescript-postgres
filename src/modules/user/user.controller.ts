@@ -2,19 +2,16 @@ import { Request, Response, Router } from 'express';
 import { BaseController } from '@base/controller.base';
 import { UserMapper } from './user.mapper';
 import { HTTP } from '@type/http/http.status.type';
-import { UserRepository } from './user.repository';
 
 export class UserController extends BaseController {
     public path = '/user';
     public router = Router();
     private userMapper: UserMapper;
-    private userRepository: UserRepository;
 
     constructor() {
         super();
         this.initializeRoutes();
         this.userMapper = new UserMapper();
-        this.userRepository = new UserRepository();
     }
 
     public initializeRoutes() {
@@ -33,9 +30,9 @@ export class UserController extends BaseController {
 
     createUser = async (req: Request, res: Response) => {
         try {
-            const user = await this.userMapper.create(req.body);
+            await this.userMapper.create(req.body);
 
-            return res.status(HTTP.Created);
+            return res.status(HTTP.Created).send('');
         } catch (error) {
             this.log(error);
 

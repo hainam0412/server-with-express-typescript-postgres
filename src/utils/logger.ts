@@ -13,7 +13,11 @@ export class Logger {
     }
 
     public async write(file: string, message: string) {
-        fs.writeFileSync(this.getFile(file), `- ${this.getCurrentTime()}: ${message}`);
+        fs.appendFile(this.getFile(file), `\n - ${this.getCurrentTime()}: ${message}`, (error) => {
+            if (error) {
+                console.error(error);
+            }
+        });
     }
 
     clearAll() {}
