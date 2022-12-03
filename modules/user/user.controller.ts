@@ -1,6 +1,6 @@
-import { Request, response, Response, Router } from 'express';
-import { User } from '../models/user';
-import { AbstractController } from './abstract.controller';
+import { Request, Response, Router } from 'express';
+import { User } from './user.model';
+import { AbstractController } from '@module/abstract.controller';
 
 export class UserController extends AbstractController {
     public path = '/user';
