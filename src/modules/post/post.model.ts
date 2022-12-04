@@ -33,6 +33,7 @@ Post.init(
             validate: {
                 is: Pattern.slug,
             },
+            unique: true,
         },
         excerpt: {
             type: new DataTypes.STRING(256),

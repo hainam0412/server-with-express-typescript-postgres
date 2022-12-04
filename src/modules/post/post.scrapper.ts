@@ -1,5 +1,6 @@
 import { BaseScrapper } from '@base/scrapper.base';
 import { StringMapper } from '@module/core/mapper/string.mapper';
+import { ArrayUtils } from '@utils/array';
 import { PostDto } from './post.dto';
 import { PostRepository } from './post.repository';
 import { PostType } from './post.type';
@@ -8,11 +9,13 @@ import { TRAVEL_POST_SCRAPPING_URL } from './scrapping/scrapping.url';
 export class PostScrapper extends BaseScrapper {
     private postRepository: PostRepository;
     private stringMapper: StringMapper;
+    private arrayUtils: ArrayUtils;
 
     constructor() {
         super();
         this.postRepository = new PostRepository();
         this.stringMapper = new StringMapper();
+        this.arrayUtils = new ArrayUtils();
     }
 
     public async travelPostScrapping(): Promise<PostDto[]> {
@@ -24,7 +27,7 @@ export class PostScrapper extends BaseScrapper {
             const url = postElement.find('.elementor-post__thumbnail__link').attr('href') || null;
             const title = postElement.find('.elementor-post__title').text().trim();
 
-            if (null !== url && false === (await this.postRepository.checkExistsByUrlAndType(url, PostType.craw))) {
+            if (null !== url) {
                 posts.push({
                     title,
                     slug: this.stringMapper.slugMapperFromUrl(url, TRAVEL_POST_SCRAPPING_URL),
@@ -36,8 +39,9 @@ export class PostScrapper extends BaseScrapper {
                 });
             }
         });
-        console.log(posts);
 
-        return posts;
+        return await this.arrayUtils.asyncFilter<PostDto>(posts, async (post) => {
+            return false === (await this.postRepository.checkExistsByUrlAndType(post.url as string, PostType.craw));
+        });
     }
 }
