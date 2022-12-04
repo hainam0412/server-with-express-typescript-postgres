@@ -35,14 +35,14 @@ export class PostScrapper extends BaseScrapper {
                     content: '',
                     excerpt: '',
                     tag: [],
-                    type: PostType.craw,
+                    type: PostType.crawl,
                     crawUrl: TRAVEL_POST_SCRAPPING_URL,
                 });
             }
         });
 
         return await this.arrayUtils.asyncFilter<PostDto>(posts, async (post) => {
-            return false === (await this.postRepository.checkExistsByUrlAndType(post.url as string, PostType.craw));
+            return false === (await this.postRepository.checkExistsByUrlAndType(post.url as string, PostType.crawl));
         });
     }
 

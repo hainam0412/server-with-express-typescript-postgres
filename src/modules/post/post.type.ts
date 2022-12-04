@@ -1,7 +1,7 @@
 import { PostInterface } from './post.interface';
 
 export enum PostType {
-    craw = 'craw',
+    crawl = 'crawl',
     default = 'default',
 }
 

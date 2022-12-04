@@ -24,7 +24,7 @@ export class PostRepository extends BaseRepository implements PostRepositoryInte
     }
 
     async getCrawlPostsByCrawUrl(crawUrl: string): Promise<Post[]> {
-        return await Post.findAll({ where: { crawUrl, type: PostType.craw } });
+        return await Post.findAll({ where: { crawUrl, type: PostType.crawl } });
     }
 
     async bulkCreate(multiPostDto: PostDto[]) {
