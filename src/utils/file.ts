@@ -8,7 +8,7 @@ export class FileUtils {
             const fileData = await require(filePath);
             const context = this.getClassByPrefix(fileData, prefix);
             // If class not found by prefix then create instance from first object key
-            const module = context ? new context() : new (Object.values(fileData as any) as any)[0]();
+            const module = context ? new context() : new (Object.values(fileData) as any)[0]();
 
             modules.push(module);
         }
