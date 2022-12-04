@@ -6,7 +6,6 @@ import { ControllerInterface } from '@interface/controller.interface';
 
 export class UserController extends BaseController implements ControllerInterface {
     public path = '/user';
-    public router = Router();
     private userMapper: UserMapper;
 
     constructor() {

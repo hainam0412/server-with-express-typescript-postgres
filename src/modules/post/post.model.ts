@@ -2,10 +2,12 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '@module/sequelize-instance';
 import { PostInterface } from './post.interface';
 import { PostType } from './post.type';
+import { Pattern } from '@type/pattern.type';
 
 export class Post extends Model implements PostInterface {
     declare id: number;
     declare title: string;
+    declare slug: string;
     declare excerpt: string;
     declare content: string;
     declare author: string;
@@ -24,6 +26,13 @@ Post.init(
         title: {
             type: new DataTypes.STRING(128),
             allowNull: false,
+        },
+        slug: {
+            type: new DataTypes.STRING(256),
+            allowNull: false,
+            validate: {
+                is: Pattern.slug,
+            },
         },
         excerpt: {
             type: new DataTypes.STRING(256),

@@ -1,10 +1,9 @@
 import 'module-alias/register';
-import express, { Express, Request, Response, Application } from 'express';
+import express, { Application } from 'express';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
 import bodyParser from 'body-parser';
 import { BaseController } from './base/controller.base';
-import { UserController } from './modules/user/user.controller';
 
 dotenv.config({
     path: resolve(__dirname, '../.env'),
@@ -12,6 +11,7 @@ dotenv.config({
 
 import { syncModels } from './db';
 import { startCronJob } from './cron-job';
+import { APP_CONTROLLERS } from './config';
 
 const port = Number(process.env.PORT);
 
@@ -52,5 +52,5 @@ class App {
     }
 }
 
-const app = new App([new UserController()]);
+const app = new App(APP_CONTROLLERS);
 app.listen();

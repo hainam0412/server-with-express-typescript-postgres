@@ -8,6 +8,7 @@ export interface PostRepositoryInterface extends RepositoryInterface<Post> {
 export interface PostInterface {
     id?: number;
     title: string;
+    slug: string;
     excerpt: string;
     content: string;
     author: string;

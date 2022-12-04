@@ -4,11 +4,12 @@ import { ControllerInterface } from '@interface/controller.interface';
 
 export class BaseController {
     public path: string = '';
-    public router = Router();
+    public router: Router;
 
     private logger: Logger;
 
     constructor() {
+        this.router = Router();
         this.logger = new Logger();
     }
 
