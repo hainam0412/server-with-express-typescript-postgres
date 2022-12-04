@@ -1,10 +1,11 @@
+import { CronInterface, CronJobType } from '@interface/cron.interface';
 import { Logger } from '@utils/logger';
 import { CronJob } from 'cron';
 import { DateTime } from 'luxon';
 
-export class BaseCron {
+export class BaseCron implements CronInterface {
     public logger: Logger;
-    public cronJobs: { name: string; job: CronJob }[] = [];
+    public cronJobs: CronJobType[] = [];
 
     constructor() {
         this.logger = new Logger();

@@ -1,7 +1,6 @@
 import { BaseCron } from '@base/cron.base';
 import { EntityHelper } from '@module/core/helper/entity.helper';
 import { PostInterface } from './post.interface';
-import { Post } from './post.model';
 import { PostRepository } from './post.repository';
 import { PostScrapper } from './post.scrapper';
 import { TRAVEL_POST_SCRAPPING_URL } from './scrapping/scrapping.url';
@@ -17,12 +16,12 @@ export class PostCron extends BaseCron {
         this.postRepository = new PostRepository();
         this.entityHelper = new EntityHelper();
 
-        this.addJob('Crawl Travel Posts', '* * * * *', async () => {
+        this.addJob('Crawl Travel Posts', '* 1 * * *', async () => {
             const posts = await this.postScrapper.travelPostsScrapping();
             this.postRepository.bulkCreate(posts);
         });
 
-        this.addJob('Crawl Travel Post content', '* * * * *', async () => {
+        this.addJob('Crawl Travel Post content', '* 1 * * *', async () => {
             const posts = await this.postRepository.getCrawlPostsByCrawUrl(TRAVEL_POST_SCRAPPING_URL);
 
             for (let index = 0; index < posts.length; index++) {
