@@ -17,11 +17,18 @@ export class PostController extends BaseController implements ControllerInterfac
 
     public initializeRoutes() {
         this.router.get(this.route('all'), this.getAllPosts);
+        this.router.get(this.route(':id/content'), this.getPostContent);
     }
 
     getAllPosts = async (req: Request, res: Response): Promise<Response<PostResponseType>> => {
         const posts = await this.postMapper.findAll();
 
         return res.json(posts);
+    };
+
+    getPostContent = async (req: Request, res: Response): Promise<Response<{ content: string }>> => {
+        const post = await this.postMapper.getById(Number(req.params.id));
+
+        return res.json({ content: post.content });
     };
 }
