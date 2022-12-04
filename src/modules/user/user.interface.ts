@@ -11,7 +11,4 @@ export interface UserInterface {
     email: string;
     password: string;
     roles: Role;
-
-    validPassword: (password: string) => boolean;
-    setPassword: (password: string) => void;
 }

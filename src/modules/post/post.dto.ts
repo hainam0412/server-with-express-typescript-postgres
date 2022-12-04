@@ -1,8 +1,9 @@
 import { Pattern } from '@type/pattern.type';
-import { IsString, IsArray, IsEnum, Matches } from 'class-validator';
+import { IsString, IsArray, IsEnum, Matches, IsUrl } from 'class-validator';
+import { PostInterface } from './post.interface';
 import { PostType } from './post.type';
 
-export class PostDto {
+export class PostDto implements PostInterface {
     @IsString()
     public id?: number;
 
@@ -28,4 +29,6 @@ export class PostDto {
     type: PostType;
 
     url: string | null;
+
+    crawUrl: string | null;
 }

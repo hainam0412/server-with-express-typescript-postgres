@@ -21,6 +21,7 @@ export class PostMapper {
                 tag: post.tag,
                 type: post.type,
                 url: post.url,
+                crawUrl: post.crawUrl,
             };
         });
     }

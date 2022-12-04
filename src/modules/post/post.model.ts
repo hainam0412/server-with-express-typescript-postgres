@@ -14,6 +14,7 @@ export class Post extends Model implements PostInterface {
     declare tag: string[];
     declare type: PostType;
     declare url: string | null;
+    declare crawUrl: string | null;
 }
 
 Post.init(
@@ -62,6 +63,14 @@ Post.init(
             type: new DataTypes.STRING(),
             allowNull: true,
             defaultValue: null,
+        },
+        crawUrl: {
+            type: new DataTypes.STRING(),
+            allowNull: true,
+            defaultValue: null,
+            validate: {
+                isUrl: true,
+            },
         },
     },
     {

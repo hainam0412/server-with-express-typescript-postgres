@@ -1,7 +1,8 @@
 import { Role } from '@type/role.type';
 import { IsString, IsEnum } from 'class-validator';
+import { UserInterface } from './user.interface';
 
-export class UserDto {
+export class UserDto implements UserInterface {
     @IsString()
     public id: number;
 

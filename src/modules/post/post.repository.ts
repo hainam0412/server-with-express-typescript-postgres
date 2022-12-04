@@ -30,6 +30,7 @@ export class PostRepository extends BaseRepository implements PostRepositoryInte
                 tag: postDto.tag,
                 type: postDto.type,
                 url: postDto.url,
+                crawUrl: postDto.crawUrl,
             };
         });
 

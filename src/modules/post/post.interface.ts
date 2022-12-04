@@ -11,8 +11,9 @@ export interface PostInterface {
     slug: string;
     excerpt: string;
     content: string;
-    author: string;
+    author?: string;
     tag: string[];
     type: PostType;
     url: string | null;
+    crawUrl: string | null;
 }

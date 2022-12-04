@@ -36,6 +36,7 @@ export class PostScrapper extends BaseScrapper {
                     excerpt: '',
                     tag: [],
                     type: PostType.craw,
+                    crawUrl: TRAVEL_POST_SCRAPPING_URL,
                 });
             }
         });
