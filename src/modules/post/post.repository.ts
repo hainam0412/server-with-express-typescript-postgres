@@ -20,9 +20,11 @@ export class PostRepository extends BaseRepository implements PostRepositoryInte
     }
 
     async bulkCreate(multiPostDto: PostDto[]) {
+        console.log(multiPostDto);
         const posts = multiPostDto.map((postDto) => {
             return {
                 title: postDto.title,
+                slug: postDto.slug,
                 excerpt: postDto.excerpt,
                 content: postDto.content,
                 author: postDto.author,
@@ -31,6 +33,7 @@ export class PostRepository extends BaseRepository implements PostRepositoryInte
                 url: postDto.url,
             };
         });
+        console.log(posts);
 
         return await Post.bulkCreate(posts);
     }

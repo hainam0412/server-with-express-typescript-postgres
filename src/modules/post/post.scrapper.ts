@@ -21,13 +21,13 @@ export class PostScrapper extends BaseScrapper {
 
         $('article.elementor-post.elementor-grid-item').each(async (index, item) => {
             const postElement = $(item);
-
             const url = postElement.find('.elementor-post__thumbnail__link').attr('href') || null;
             const title = postElement.find('.elementor-post__title').text().trim();
+
             if (null !== url && false === (await this.postRepository.checkExistsByUrlAndType(url, PostType.craw))) {
                 posts.push({
                     title,
-                    slug: this.stringMapper.slugMapper(url),
+                    slug: this.stringMapper.slugMapperFromUrl(url, TRAVEL_POST_SCRAPPING_URL),
                     url,
                     content: '',
                     excerpt: '',
@@ -36,6 +36,7 @@ export class PostScrapper extends BaseScrapper {
                 });
             }
         });
+        console.log(posts);
 
         return posts;
     }
