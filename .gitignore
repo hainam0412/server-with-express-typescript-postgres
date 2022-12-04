@@ -1,5 +1,8 @@
 node_modules
 dist
-.vscode
+.vscode/*
 .env
 log
+
+# Keep
+!.vscode/launch.json.example
