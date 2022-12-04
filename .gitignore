@@ -6,3 +6,8 @@ log
 
 # Keep
 !.vscode/launch.json.example
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
