@@ -1,20 +1,11 @@
 import 'module-alias/register';
 import express, { Application } from 'express';
-import dotenv from 'dotenv';
-import { resolve } from 'path';
 import bodyParser from 'body-parser';
 import { BaseController } from './base/controller.base';
-
-dotenv.config({
-    path: resolve(__dirname, '../.env'),
-});
-
 import { syncModels } from './db';
 import { startCronJob } from './cron-job';
 import { APP_CONTROLLERS } from './config';
-
-const port = Number(process.env.PORT);
-
+import { ENV_VAR } from './env';
 class App {
     public app: Application;
 
@@ -26,6 +17,8 @@ class App {
     }
 
     public listen() {
+        const port = ENV_VAR.PORT;
+
         this.app.listen(port, () => {
             console.log(`Server is running on http://localhost:${port}`);
         });

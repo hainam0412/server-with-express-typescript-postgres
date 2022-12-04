@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '@module/sequelize-instance';
+import { sequelize } from '@module/core/instance/sequelize-instance';
 import { PostInterface } from './post.interface';
 import { PostType } from './post.type';
 import { Pattern } from '@type/pattern.type';

@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '@module/sequelize-instance';
+import { sequelize } from '@module/core/instance/sequelize-instance';
 import { Role } from '@type/role.type';
 import { UserInterface } from './user.interface';
 import crypto from 'crypto';
