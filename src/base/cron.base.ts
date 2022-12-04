@@ -26,7 +26,7 @@ export class BaseCron {
     public startAllJobs() {
         this.cronJobs.forEach(({ job, name }) => {
             if (!job.running) {
-                this.logger.write('cron', `Start ${name} cron`);
+                this.logger.write('cron', `Start ${name} cron job`);
                 job.start();
             }
         });

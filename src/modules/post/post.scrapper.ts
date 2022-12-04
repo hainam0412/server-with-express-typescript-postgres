@@ -18,7 +18,7 @@ export class PostScrapper extends BaseScrapper {
         this.arrayUtils = new ArrayUtils();
     }
 
-    public async travelPostScrapping(): Promise<PostDto[]> {
+    public async travelPostsScrapping(): Promise<PostDto[]> {
         const $ = await this.getHtml(TRAVEL_POST_SCRAPPING_URL);
         const posts: PostDto[] = [];
 
@@ -44,5 +44,17 @@ export class PostScrapper extends BaseScrapper {
         return await this.arrayUtils.asyncFilter<PostDto>(posts, async (post) => {
             return false === (await this.postRepository.checkExistsByUrlAndType(post.url as string, PostType.craw));
         });
+    }
+
+    public async getTravelPostContent(postUrl: string): Promise<{ author: string; content: string }> {
+        const $ = await this.getHtml(postUrl);
+
+        const author = $('.ast-single-post-order .author-name').text().trim();
+        const content = $('article .entry-content').remove('.sharedaddy.sd-sharing-enabled').remove('.jp-relatedposts').remove('.ss-inline-share-wrapper').html() || '';
+
+        return {
+            author,
+            content: this.stringMapper.safeStringMapper(content),
+        };
     }
 }

@@ -19,6 +19,10 @@ export class PostRepository extends BaseRepository implements PostRepositoryInte
         return null !== (await Post.findOne({ where: { url, type } }));
     }
 
+    async getCrawlPostsByCrawUrl(crawUrl: string): Promise<Post[]> {
+        return await Post.findAll({ where: { crawUrl, type: PostType.craw } });
+    }
+
     async bulkCreate(multiPostDto: PostDto[]) {
         const posts = multiPostDto.map((postDto) => {
             return {
@@ -36,4 +40,6 @@ export class PostRepository extends BaseRepository implements PostRepositoryInte
 
         return await Post.bulkCreate(posts);
     }
+
+    async update(id: number): Promise<void> {}
 }
