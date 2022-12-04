@@ -20,9 +20,9 @@ class App {
 
     constructor(controllers: BaseController[]) {
         this.app = express();
-        this.initializeMiddleWares().then(() => {
-            this.initializeControllers(controllers);
-        });
+        this.initializeMiddleWares();
+        this.initializeControllers(controllers);
+        this.initializeAppConfiguration();
     }
 
     public listen() {
@@ -31,13 +31,16 @@ class App {
         });
     }
 
-    private async initializeMiddleWares() {
+    private initializeMiddleWares() {
         this.app.use(bodyParser.json());
         this.app.use(
             bodyParser.urlencoded({
                 extended: true,
             })
         );
+    }
+
+    private async initializeAppConfiguration() {
         await syncModels();
         startCronJob();
     }

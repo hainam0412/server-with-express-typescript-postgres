@@ -1,5 +1,6 @@
 import { Response, Router } from 'express';
 import { Logger } from '@utils/logger';
+import { ControllerInterface } from '@interface/controller.interface';
 
 export class BaseController {
     public path: string = '';

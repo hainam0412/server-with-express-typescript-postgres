@@ -2,8 +2,9 @@ import { Request, Response, Router } from 'express';
 import { BaseController } from '@base/controller.base';
 import { UserMapper } from './user.mapper';
 import { HTTP } from '@type/http/http.status.type';
+import { ControllerInterface } from '@interface/controller.interface';
 
-export class UserController extends BaseController {
+export class UserController extends BaseController implements ControllerInterface {
     public path = '/user';
     public router = Router();
     private userMapper: UserMapper;

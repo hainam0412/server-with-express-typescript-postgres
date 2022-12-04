@@ -1,6 +1,9 @@
 import { PostCron } from '@module/post/post.cron';
 
+const JOBS = [new PostCron()];
+
 export const startCronJob = () => {
-    const postCron = new PostCron();
-    postCron.startJob();
+    JOBS.forEach((job) => {
+        job.startAllJobs();
+    });
 };

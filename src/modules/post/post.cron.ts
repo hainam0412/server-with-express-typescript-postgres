@@ -11,7 +11,7 @@ export class PostCron extends BaseCron {
         this.postScrapper = new PostScrapper();
         this.postRepository = new PostRepository();
 
-        this.createJob('* * * * *', async () => {
+        this.addJob('Travel Post', '* * * * *', async () => {
             this.postRepository.bulkCreate(await this.postScrapper.travelPostScrapping());
         });
     }

@@ -15,7 +15,7 @@ export class PostDto {
     public content: string;
 
     @IsString()
-    public author: string;
+    public author?: string;
 
     @IsArray()
     public tag: string[];

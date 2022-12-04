@@ -9,11 +9,13 @@ export class Logger {
     }
 
     getCurrentTime() {
-        return new Date().toLocaleTimeString();
+        const now = new Date();
+
+        return now.toLocaleString();
     }
 
     public async write(file: string, message: string) {
-        if (fs.existsSync(file)) {
+        if (fs.existsSync(this.getFile(file))) {
             fs.appendFile(this.getFile(file), `\n - ${this.getCurrentTime()}: ${message}`, (error) => {
                 if (error) {
                     console.error(error);
