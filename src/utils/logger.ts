@@ -21,6 +21,8 @@ export class Logger {
                     console.error(error);
                 }
             });
+        } else {
+            fs.writeFileSync(this.getFile(file), `\n - ${this.getCurrentTime()}: ${message}`);
         }
     }
 
