@@ -17,10 +17,16 @@ export class PostMapper {
         });
     }
 
-    public async getById(id: number): Promise<PostResponseType> {
+    public async getById(id: number): Promise<PostResponseType | null> {
         const post = await this.postRepository.getById(id);
 
-        return this.responseMapping(post);
+        return post ? this.responseMapping(post) : null;
+    }
+
+    public async getBySlug(slug: string): Promise<PostResponseType | null> {
+        const post = await this.postRepository.getBySlug(slug);
+
+        return post ? this.responseMapping(post) : null;
     }
 
     private responseMapping(post: Post): PostResponseType {

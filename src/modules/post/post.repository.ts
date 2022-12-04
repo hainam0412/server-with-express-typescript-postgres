@@ -13,6 +13,10 @@ export class PostRepository extends BaseRepository implements PostRepositoryInte
         return await Post.findOne({ where: { id } });
     }
 
+    async getBySlug(slug: string): Promise<Post | null> {
+        return await Post.findOne({ where: { slug } });
+    }
+
     async delete(id: number): Promise<any> {}
 
     async checkExistsByUrlAndType(url: string, type: PostType): Promise<boolean> {

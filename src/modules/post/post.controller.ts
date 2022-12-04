@@ -17,7 +17,7 @@ export class PostController extends BaseController implements ControllerInterfac
 
     public initializeRoutes() {
         this.router.get(this.route('all'), this.getAllPosts);
-        this.router.get(this.route(':id/content'), this.getPostContent);
+        this.router.get(this.route(':slug'), this.getPostContentBySlug);
     }
 
     getAllPosts = async (req: Request, res: Response): Promise<Response<PostResponseType>> => {
@@ -26,9 +26,9 @@ export class PostController extends BaseController implements ControllerInterfac
         return res.json(posts);
     };
 
-    getPostContent = async (req: Request, res: Response): Promise<Response<{ content: string }>> => {
-        const post = await this.postMapper.getById(Number(req.params.id));
+    getPostContentBySlug = async (req: Request, res: Response): Promise<Response<{ content: string }>> => {
+        const post = await this.postMapper.getBySlug(req.params.slug);
 
-        return res.json({ content: post.content });
+        return res.json({ content: post ? post.content : `Post not found` });
     };
 }

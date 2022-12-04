@@ -14,6 +14,6 @@ export class StringMapper {
     }
 
     public cleanLineBreak(text: string) {
-        return text.replace(/(?:\r\n|\r|\n)/g, '');
+        return text.replace(/(?:\r\n|\r|\n|\t)/g, '');
     }
 }
