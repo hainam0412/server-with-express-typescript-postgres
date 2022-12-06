@@ -1,6 +1,6 @@
-import { PostModel } from './post.model';
-import { PostRepository } from './post.repository';
-import { PostResponseType } from './post.type';
+import { PostModel } from '../model/post.model';
+import { PostRepository } from '../repository/post.repository';
+import { PostResponseType } from '../type/post.type';
 
 export class PostMapper {
     private postRepository: PostRepository;

@@ -1,10 +1,10 @@
 import { BaseScrapper } from '@base/scrapper.base';
 import { StringMapper } from '@module/core/mapper/string.mapper';
 import { ArrayUtils } from '@utils/array';
-import { PostDto } from './post.dto';
-import { PostRepository } from './post.repository';
-import { PostType } from './post.type';
-import { TRAVEL_POST_SCRAPPING_URL } from './scrapping/scrapping.url';
+import { PostDto } from '../dto/post.dto';
+import { PostRepository } from '../repository/post.repository';
+import { PostType } from '../type/post.type';
+import { TRAVEL_POST_SCRAPPING_URL } from './scrapping.url';
 
 export class PostScrapper extends BaseScrapper {
     private postRepository: PostRepository;

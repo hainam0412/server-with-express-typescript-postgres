@@ -1,7 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '@module/core/instance/sequelize-instance';
-import { PostInput, PostInterface } from './post.interface';
-import { PostType } from './post.type';
+import { PostInput, PostInterface } from '../interface/post.interface';
+import { PostType } from '../type/post.type';
 import { Pattern } from '@type/pattern.type';
 
 export class PostModel extends Model<PostInterface, PostInput> implements PostInterface {

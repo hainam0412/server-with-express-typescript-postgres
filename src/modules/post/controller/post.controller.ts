@@ -1,8 +1,8 @@
 import { BaseController } from '@base/controller.base';
 import { ControllerInterface } from '@interface/controller.interface';
 import { Request, Response } from 'express';
-import { PostMapper } from './post.mapper';
-import { PostResponseType } from './post.type';
+import { PostMapper } from '../mapper/post.mapper';
+import { PostResponseType } from '../type/post.type';
 
 export class PostController extends BaseController implements ControllerInterface {
     public path: string = '/post';

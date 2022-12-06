@@ -1,6 +1,6 @@
 import { Optional } from 'sequelize';
-import { PostModel } from './post.model';
-import { PostType } from './post.type';
+import { PostModel } from '../model/post.model';
+import { PostType } from '../type/post.type';
 
 export interface PostRepositoryInterface extends RepositoryInterface<PostModel> {
     findById(id: number): Promise<PostModel | null>;

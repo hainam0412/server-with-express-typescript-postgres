@@ -1,8 +1,8 @@
 import { BaseRepository } from '@base/repository.base';
-import { PostDto } from './post.dto';
-import { PostRepositoryInterface } from './post.interface';
-import { PostModel } from './post.model';
-import { PostType } from './post.type';
+import { PostDto } from '../dto/post.dto';
+import { PostRepositoryInterface } from '../interface/post.interface';
+import { PostModel } from '../model/post.model';
+import { PostType } from '../type/post.type';
 
 export class PostRepository extends BaseRepository implements PostRepositoryInterface {
     async findAll(): Promise<PostModel[]> {

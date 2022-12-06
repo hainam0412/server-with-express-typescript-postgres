@@ -1,7 +1,7 @@
 import { Pattern } from '@type/pattern.type';
 import { IsString, IsArray, IsEnum, Matches, IsUrl } from 'class-validator';
-import { PostInterface } from './post.interface';
-import { PostType } from './post.type';
+import { PostInterface } from '../interface/post.interface';
+import { PostType } from '../type/post.type';
 
 export class PostDto implements PostInterface {
     @IsString()

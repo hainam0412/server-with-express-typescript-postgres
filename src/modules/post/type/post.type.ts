@@ -1,4 +1,4 @@
-import { PostInterface } from './post.interface';
+import { PostInterface } from '../interface/post.interface';
 
 export enum PostType {
     crawl = 'crawl',

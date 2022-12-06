@@ -1,9 +1,9 @@
 import { BaseCron } from '@base/cron.base';
 import { EntityHelper } from '@module/core/helper/entity.helper';
-import { PostInterface } from './post.interface';
-import { PostRepository } from './post.repository';
-import { PostScrapper } from './post.scrapper';
-import { TRAVEL_POST_SCRAPPING_URL } from './scrapping/scrapping.url';
+import { PostInterface } from '../interface/post.interface';
+import { PostRepository } from '../repository/post.repository';
+import { PostScrapper } from '../scrapper/post.scrapper';
+import { TRAVEL_POST_SCRAPPING_URL } from '../scrapper/scrapping.url';
 
 export class PostCron extends BaseCron {
     private postScrapper: PostScrapper;
