@@ -11,7 +11,7 @@ export class CreateUserCommand extends AbstractCommandLine {
         super();
         this.userMapper = new UserMapper();
 
-        this.program.command('create-user').action(async () => {
+        this.program.command('user:create').action(async () => {
             const questions: QuestionCollection<any> = [
                 {
                     type: 'input',
