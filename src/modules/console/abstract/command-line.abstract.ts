@@ -1,19 +1,12 @@
 import { CommandLineInterface } from '../interface/command-line.interface';
 import { Command } from 'commander';
-import { Program } from '../program';
+import { Console } from '../console';
 
 export abstract class AbstractCommandLine implements CommandLineInterface {
     public program: Command;
-    public programInstance: Program;
 
     constructor() {
-        this.program = new Command();
+        const console = Console.getInstance();
+        this.program = console.getProgram();
     }
-
-    public addCommand(command: Command): void {
-        const program = Program.getInstance();
-        program.addCommand(command);
-    }
-
-    public createCommand() {}
 }
