@@ -8,8 +8,6 @@ export const RegexValidation = Object.freeze({
     },
 
     validEmail(text: string) {
-        const reg = new RegExp(Pattern.email);
-
-        return reg.test(text);
+        return text.match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/);
     },
 });
