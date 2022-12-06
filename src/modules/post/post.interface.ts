@@ -2,7 +2,7 @@ import { Post } from './post.model';
 import { PostType } from './post.type';
 
 export interface PostRepositoryInterface extends RepositoryInterface<Post> {
-    getById(id: number): Promise<Post | null>;
+    findById(id: number): Promise<Post | null>;
 }
 
 export interface PostInterface {

@@ -18,13 +18,13 @@ export class PostMapper {
     }
 
     public async getById(id: number): Promise<PostResponseType | null> {
-        const post = await this.postRepository.getById(id);
+        const post = await this.postRepository.findById(id);
 
         return post ? this.responseMapping(post) : null;
     }
 
     public async getBySlug(slug: string): Promise<PostResponseType | null> {
-        const post = await this.postRepository.getBySlug(slug);
+        const post = await this.postRepository.findBySlug(slug);
 
         return post ? this.responseMapping(post) : null;
     }

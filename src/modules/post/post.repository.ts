@@ -9,11 +9,11 @@ export class PostRepository extends BaseRepository implements PostRepositoryInte
         return await Post.findAll();
     }
 
-    async getById(id: number): Promise<Post | null> {
+    async findById(id: number): Promise<Post | null> {
         return await Post.findOne({ where: { id } });
     }
 
-    async getBySlug(slug: string): Promise<Post | null> {
+    async findBySlug(slug: string): Promise<Post | null> {
         return await Post.findOne({ where: { slug } });
     }
 

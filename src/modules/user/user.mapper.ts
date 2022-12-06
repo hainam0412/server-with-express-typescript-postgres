@@ -1,11 +1,14 @@
+import { BaseMapper } from '@base/mapper.base';
 import { UserDto } from './user.dto';
+import { User } from './user.model';
 import { UserRepository } from './user.repository';
 import { UserResponseType } from './user.type';
 
-export class UserMapper {
+export class UserMapper extends BaseMapper {
     private userRepository: UserRepository;
 
     constructor() {
+        super();
         this.userRepository = new UserRepository();
     }
 
@@ -21,28 +24,46 @@ export class UserMapper {
         });
     }
 
-    public async create(userDto: UserDto): Promise<UserResponseType> {
-        const user = await this.userRepository.create(userDto);
+    public async create(request: UserDto): Promise<UserResponseType> {
+        try {
+            const user = new User();
 
-        return {
-            name: user.name,
-            roles: user.roles,
-        };
+            await this.setUserData(user, request);
+
+            return {
+                name: user.name,
+                roles: user.roles,
+            };
+        } catch (error) {
+            throw this.getErrorMessage(error);
+        }
     }
 
-    public async update(userId: number, userDto: UserDto): Promise<UserResponseType> {
-        const currentUser = await this.userRepository.getUserById(userId);
+    public async update(userId: number, request: UserDto): Promise<UserResponseType> {
+        const currentUser = await this.userRepository.findById(userId);
 
         if (null === currentUser) {
             throw 'User not found';
         }
 
-        const newUser = await this.userRepository.update(currentUser, userDto);
+        try {
+            await this.setUserData(currentUser, request);
 
-        return {
-            name: newUser.name,
-            email: newUser.email,
-            roles: newUser.roles,
-        };
+            return {
+                name: currentUser.name,
+                email: currentUser.email,
+                roles: currentUser.roles,
+            };
+        } catch (error) {
+            throw this.getErrorMessage(error);
+        }
+    }
+
+    private async setUserData(user: User, request: UserDto): Promise<void> {
+        user.name = request.name;
+        user.email = request.email;
+        user.password = request.password;
+
+        await user.save();
     }
 }
