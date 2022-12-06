@@ -6,4 +6,10 @@ export const RegexValidation = Object.freeze({
 
         return reg.test(testString);
     },
+
+    validEmail(text: string) {
+        const reg = new RegExp(Pattern.email);
+
+        return reg.test(text);
+    },
 });
