@@ -1,30 +1,30 @@
 import { BaseRepository } from '@base/repository.base';
 import { PostDto } from './post.dto';
 import { PostRepositoryInterface } from './post.interface';
-import { Post } from './post.model';
+import { PostModel } from './post.model';
 import { PostType } from './post.type';
 
 export class PostRepository extends BaseRepository implements PostRepositoryInterface {
-    async findAll(): Promise<Post[]> {
-        return await Post.findAll();
+    async findAll(): Promise<PostModel[]> {
+        return await PostModel.findAll();
     }
 
-    async findById(id: number): Promise<Post | null> {
-        return await Post.findOne({ where: { id } });
+    async findById(id: number): Promise<PostModel | null> {
+        return await PostModel.findOne({ where: { id } });
     }
 
-    async findBySlug(slug: string): Promise<Post | null> {
-        return await Post.findOne({ where: { slug } });
+    async findBySlug(slug: string): Promise<PostModel | null> {
+        return await PostModel.findOne({ where: { slug } });
     }
 
     async delete(id: number): Promise<any> {}
 
     async checkExistsByUrlAndType(url: string, type: PostType): Promise<boolean> {
-        return null !== (await Post.findOne({ where: { url, type } }));
+        return null !== (await PostModel.findOne({ where: { url, type } }));
     }
 
-    async getCrawlPostsByCrawUrl(crawUrl: string): Promise<Post[]> {
-        return await Post.findAll({ where: { crawUrl, type: PostType.crawl } });
+    async getCrawlPostsByCrawUrl(crawUrl: string): Promise<PostModel[]> {
+        return await PostModel.findAll({ where: { crawUrl, type: PostType.crawl } });
     }
 
     async bulkCreate(multiPostDto: PostDto[]) {
@@ -42,7 +42,7 @@ export class PostRepository extends BaseRepository implements PostRepositoryInte
             };
         });
 
-        return await Post.bulkCreate(posts);
+        return await PostModel.bulkCreate(posts);
     }
 
     async update(id: number): Promise<void> {}

@@ -1,4 +1,4 @@
-import { Post } from './post.model';
+import { PostModel } from './post.model';
 import { PostRepository } from './post.repository';
 import { PostResponseType } from './post.type';
 
@@ -29,7 +29,7 @@ export class PostMapper {
         return post ? this.responseMapping(post) : null;
     }
 
-    private responseMapping(post: Post): PostResponseType {
+    private responseMapping(post: PostModel): PostResponseType {
         return {
             title: post.title,
             slug: post.slug,

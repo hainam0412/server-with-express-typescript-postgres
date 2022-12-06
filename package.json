@@ -51,6 +51,7 @@
     "typescript": "^4.9.3"
   },
   "_moduleAliases": {
+    "@": "dist",
     "@type": "dist/type",
     "@module": "dist/modules",
     "@user": "dist/modules/user",

@@ -1,8 +1,8 @@
 import { SyncOptions } from 'sequelize';
-import { User } from '@user/user.model';
-import { Post } from '@module/post/post.model';
+import { UserModel } from '@user/user.model';
+import { PostModel } from '@module/post/post.model';
 
 export const syncModels = async (options: SyncOptions = {}) => {
-    await User.sync(options);
-    await Post.sync(options);
+    await UserModel.sync(options);
+    await PostModel.sync(options);
 };

@@ -1,62 +1,30 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '@module/core/instance/sequelize-instance';
 import { Role } from '@type/role.type';
-import { UserInterface } from './user.interface';
+import { UserInput, UserInterface } from './user.interface';
 import crypto from 'crypto';
 
-export class User extends Model implements UserInterface {
-    private _id: number;
-    public get id(): number {
-        return this._id;
-    }
-
-    private _name: string;
-    public get name(): string {
-        return this._name;
-    }
-    public set name(value: string) {
-        this._name = value;
-    }
-
-    private _email: string;
-    public get email(): string {
-        return this._email;
-    }
-    public set email(value: string) {
-        this._email = value;
-    }
-
-    private _password: string;
-    public get password(): string {
-        return this._password;
-    }
-    public set password(value: string) {
-        this._salt = crypto.randomBytes(16).toString('hex');
-        this._password = crypto.pbkdf2Sync(value, this._salt, 10000, 64, 'sha512').toString('hex');
-    }
-
-    private _roles: Role;
-    public get roles(): Role {
-        return this._roles;
-    }
-    public set roles(value: Role) {
-        this._roles = value;
-    }
-
-    private _salt: string;
-    public get salt(): string {
-        return this._salt;
-    }
-    public set salt(value: string) {
-        this._salt = value;
-    }
+export class UserModel extends Model<UserInterface, UserInput> implements UserInterface {
+    public id!: number;
+    public name!: string;
+    public email!: string;
+    public password!: string;
+    public salt!: string;
+    public roles!: Role;
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
 
     public validPassword(password: string): boolean {
-        return this._password === crypto.pbkdf2Sync(password, this._salt, 10000, 512, 'sha512').toString('hex');
+        return this.password === crypto.pbkdf2Sync(password, this.salt, 10000, 512, 'sha512').toString('hex');
+    }
+
+    public setPassword(value: string) {
+        this.salt = crypto.randomBytes(16).toString('hex');
+        this.password = crypto.pbkdf2Sync(value, this.salt, 10000, 64, 'sha512').toString('hex');
     }
 }
 
-User.init(
+UserModel.init(
     {
         id: {
             type: DataTypes.INTEGER,

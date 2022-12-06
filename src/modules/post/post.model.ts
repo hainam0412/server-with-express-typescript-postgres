@@ -1,23 +1,25 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '@module/core/instance/sequelize-instance';
-import { PostInterface } from './post.interface';
+import { PostInput, PostInterface } from './post.interface';
 import { PostType } from './post.type';
 import { Pattern } from '@type/pattern.type';
 
-export class Post extends Model implements PostInterface {
-    declare id: number;
-    declare title: string;
-    declare slug: string;
-    declare excerpt: string;
-    declare content: string;
-    declare author: string;
-    declare tag: string[];
-    declare type: PostType;
-    declare url: string | null;
-    declare crawUrl: string | null;
+export class PostModel extends Model<PostInterface, PostInput> implements PostInterface {
+    public id!: number;
+    public title!: string;
+    public slug!: string;
+    public excerpt!: string;
+    public content!: string;
+    public author!: string;
+    public tag!: string[];
+    public type!: PostType;
+    public url!: string | null;
+    public crawUrl!: string | null;
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
 }
 
-Post.init(
+PostModel.init(
     {
         id: {
             type: DataTypes.INTEGER,

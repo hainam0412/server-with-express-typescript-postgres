@@ -1,12 +1,19 @@
 import { Role } from '@type/role.type';
-import { User } from './user.model';
+import { Optional } from 'sequelize';
+import { UserModel } from './user.model';
 
-export interface UserRepositoryInterface extends RepositoryInterface<User> {}
+export interface UserRepositoryInterface extends RepositoryInterface<UserModel> {}
 
 export interface UserInterface {
-    readonly id: number;
-    readonly name: string;
-    readonly email: string;
-    readonly password: string;
-    readonly roles: Role;
+    id: number;
+    name: string;
+    email: string;
+    salt: string;
+    password: string;
+    roles: Role;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
+
+export interface UserInput extends Optional<UserInterface, 'id' | 'roles'> {}
+export interface UserOutput extends Required<UserInterface> {}

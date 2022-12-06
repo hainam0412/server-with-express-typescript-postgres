@@ -1,6 +1,6 @@
 import { BaseMapper } from '@base/mapper.base';
 import { UserDto } from './user.dto';
-import { User } from './user.model';
+import { UserModel } from './user.model';
 import { UserRepository } from './user.repository';
 import { UserResponseType } from './user.type';
 
@@ -26,7 +26,7 @@ export class UserMapper extends BaseMapper {
 
     public async create(request: UserDto): Promise<UserResponseType> {
         try {
-            const user = new User();
+            const user = new UserModel();
 
             await this.setUserData(user, request);
 
@@ -59,10 +59,10 @@ export class UserMapper extends BaseMapper {
         }
     }
 
-    private async setUserData(user: User, request: UserDto): Promise<void> {
+    private async setUserData(user: UserModel, request: UserDto): Promise<void> {
         user.name = request.name;
         user.email = request.email;
-        user.password = request.password;
+        user.setPassword(request.password);
 
         await user.save();
     }

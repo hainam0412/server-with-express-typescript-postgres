@@ -1,8 +1,9 @@
-import { Post } from './post.model';
+import { Optional } from 'sequelize';
+import { PostModel } from './post.model';
 import { PostType } from './post.type';
 
-export interface PostRepositoryInterface extends RepositoryInterface<Post> {
-    findById(id: number): Promise<Post | null>;
+export interface PostRepositoryInterface extends RepositoryInterface<PostModel> {
+    findById(id: number): Promise<PostModel | null>;
 }
 
 export interface PostInterface {
@@ -16,4 +17,9 @@ export interface PostInterface {
     type: PostType;
     url: string | null;
     crawUrl: string | null;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
+
+export interface PostInput extends Optional<PostInterface, 'id' | 'author'> {}
+export interface PostOutput extends Required<PostInterface> {}
