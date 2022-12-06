@@ -1,5 +1,5 @@
 import { SyncOptions } from 'sequelize';
-import { UserModel } from '@user/user.model';
+import { UserModel } from '@module/user/model/user.model';
 import { PostModel } from '@module/post/post.model';
 
 export const syncModels = async (options: SyncOptions = {}) => {

@@ -38,6 +38,7 @@ export class App {
         await syncModels();
         await this.initializeCronJobs();
         await this.initializeControllers();
+        await this.initializeCommands();
     }
 
     private async initializeControllers() {
@@ -54,5 +55,9 @@ export class App {
         for (const model of models) {
             model.startAllJobs();
         }
+    }
+
+    private async initializeCommands() {
+        // await this.fileUtils.loadModules<CronInterface>('modules', 'command');
     }
 }

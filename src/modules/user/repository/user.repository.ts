@@ -1,5 +1,5 @@
-import { UserRepositoryInterface } from './user.interface';
-import { UserModel } from './user.model';
+import { UserRepositoryInterface } from '../interface/user.interface';
+import { UserModel } from '../model/user.model';
 import { BaseRepository } from '@base/repository.base';
 
 export class UserRepository extends BaseRepository implements UserRepositoryInterface {

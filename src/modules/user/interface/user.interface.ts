@@ -1,6 +1,6 @@
 import { Role } from '@type/role.type';
 import { Optional } from 'sequelize';
-import { UserModel } from './user.model';
+import { UserModel } from '../model/user.model';
 
 export interface UserRepositoryInterface extends RepositoryInterface<UserModel> {}
 

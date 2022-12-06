@@ -1,8 +1,8 @@
 import { BaseMapper } from '@base/mapper.base';
-import { UserDto } from './user.dto';
-import { UserModel } from './user.model';
-import { UserRepository } from './user.repository';
-import { UserResponseType } from './user.type';
+import { UserDto } from '../dto/user.dto';
+import { UserModel } from '../model/user.model';
+import { UserRepository } from '../repository/user.repository';
+import { UserResponseType } from '../type/user.type';
 
 export class UserMapper extends BaseMapper {
     private userRepository: UserRepository;

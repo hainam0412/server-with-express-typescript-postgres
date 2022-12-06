@@ -1,7 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '@module/core/instance/sequelize-instance';
 import { Role } from '@type/role.type';
-import { UserInput, UserInterface } from './user.interface';
+import { UserInput, UserInterface } from '../interface/user.interface';
 import crypto from 'crypto';
 
 export class UserModel extends Model<UserInterface, UserInput> implements UserInterface {

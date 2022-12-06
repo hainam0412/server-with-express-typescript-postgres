@@ -1,5 +1,5 @@
 import { Role } from '@type/role.type';
-import { UserInterface } from './user.interface';
+import { UserInterface } from '../interface/user.interface';
 
 export class UserDto implements UserInterface {
     public id: number;

@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { BaseController } from '@base/controller.base';
-import { UserMapper } from './user.mapper';
+import { UserMapper } from '../mapper/user.mapper';
 import { HTTP } from '@type/http/http.status.type';
 import { ControllerInterface } from '@interface/controller.interface';
 
