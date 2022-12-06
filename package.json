@@ -4,9 +4,9 @@
   "description": "Blog Project",
   "main": "index.ts",
   "scripts": {
-    "build": "npx tsc",
+    "build": "npx tsc && tsc-alias",
     "start": "node dist/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "dev": "concurrently \"npx tsc --watch\" \"tsc-alias -w\" \"nodemon -q dist/index.js\"",
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
     "console": "npm i -g && console"
   },
@@ -60,6 +60,7 @@
     "nodemon": "^2.0.20",
     "prettier": "^2.8.0",
     "pretty-quick": "^3.1.3",
+    "tsc-alias": "^1.8.1",
     "typescript": "^4.9.3"
   },
   "_moduleAliases": {

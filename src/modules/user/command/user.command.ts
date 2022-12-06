@@ -1,22 +1,25 @@
-import { AbstractCommandLine } from '../../console/abstract/command-line.abstract';
+import { AbstractCommandLine } from '@module/console/abstract/command-line.abstract';
 import inquirer, { QuestionCollection } from 'inquirer';
-import { Role } from '../../../type/role.type';
+import { Role } from '@type/role.type';
+import { RegexValidation } from '@utils/regex';
+import { UserMapper } from '../mapper/user.mapper';
 
 export class UserCommand extends AbstractCommandLine {
-    
+    private userMapper: UserMapper;
 
     constructor() {
         super();
+        this.userMapper = new UserMapper();
 
         this.addCommand(
             this.program.command('create-user').action(async () => {
                 const questions: QuestionCollection<any> = [
                     {
                         type: 'input',
-                        name: 'username',
+                        name: 'name',
                         message: 'Please enter user name',
                         validate(value: string) {
-                            const pass = value.length < 128;
+                            const pass = value.length < 128 && value.length > 0;
                             if (pass) {
                                 return true;
                             }
@@ -29,12 +32,12 @@ export class UserCommand extends AbstractCommandLine {
                         name: 'email',
                         message: 'Please enter email',
                         validate(value: string) {
-                            const pass = value.match(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/) && value.length <= 128;
+                            const pass = RegexValidation.validEmail(value) && value.length <= 128 && value.length > 0;
                             if (pass) {
                                 return true;
                             }
 
-                            return value.length > 128 ? 'Email cannot longer than 128 characters' : 'Please enter a valid email';
+                            return 'Wrong email format';
                         },
                     },
                     {
@@ -51,7 +54,13 @@ export class UserCommand extends AbstractCommandLine {
                 ];
 
                 const answers = await inquirer.prompt(questions);
-                console.log(JSON.stringify(answers, null, '  '));
+                try {
+                    await this.userMapper.create(answers);
+
+                    console.log(`Create user ${answers.email} successfully`);
+                } catch (error) {
+                    console.error(error);
+                }
             })
         );
     }

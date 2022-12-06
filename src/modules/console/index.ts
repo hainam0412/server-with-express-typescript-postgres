@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { FileUtils } from '../../utils/file';
+import { FileUtils } from '@utils/file';
 import { CommandLineInterface } from './interface/command-line.interface';
 import { Program } from './program';
 
