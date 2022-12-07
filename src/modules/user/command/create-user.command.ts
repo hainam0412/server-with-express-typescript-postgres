@@ -1,5 +1,5 @@
 import { AbstractCommandLine } from '@module/console/abstract/command-line.abstract';
-import inquirer, { QuestionCollection } from 'inquirer';
+import { QuestionCollection } from 'inquirer';
 import { Role } from '@type/role.type';
 import { RegexValidation } from '@utils/regex';
 import { UserMapper } from '../mapper/user.mapper';
@@ -52,7 +52,7 @@ export class CreateUserCommand extends AbstractCommandLine {
                 },
             ];
 
-            const answers = await inquirer.prompt(questions);
+            const answers = await this.inquirer.prompt(questions);
             try {
                 await this.userMapper.create(answers);
 

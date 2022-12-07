@@ -4,7 +4,7 @@
   "description": "Blog Project",
   "main": "index.ts",
   "scripts": {
-    "build": "npx tsc && tsc-alias",
+    "build": "rm -rf dist/* && npx tsc && tsc-alias",
     "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"tsc-alias -w\" \"nodemon -q dist/index.js\"",
     "refresh": "rm -rf ./node_modules ./package-lock.json && npm install",
