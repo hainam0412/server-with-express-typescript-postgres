@@ -3,7 +3,7 @@
 import { Command } from 'commander';
 import { FileUtils } from '@utils/file';
 import { CommandLineInterface } from './interface/command-line.interface';
-import { Console } from './console';
+import { AppConsole } from './console';
 
 // const program = new Command();
 // program
@@ -19,7 +19,7 @@ import { Console } from './console';
 (async () => {
     const fileUtils = new FileUtils();
     await fileUtils.loadModules<CommandLineInterface>('modules', 'command');
-    const console = Console.getInstance();
-    const program = console.getProgram();
+    const appConsole = AppConsole.getInstance();
+    const program = appConsole.getProgram();
     program.parse();
 })();

@@ -1,19 +1,19 @@
 import { Command } from 'commander';
 
-export class Console {
-    private static instance: Console;
+export class AppConsole {
+    private static instance: AppConsole;
     private program: Command;
 
     private constructor() {
         this.program = new Command();
     }
 
-    public static getInstance(): Console {
-        if (!Console.instance) {
-            Console.instance = new Console();
+    public static getInstance(): AppConsole {
+        if (!AppConsole.instance) {
+            AppConsole.instance = new AppConsole();
         }
 
-        return Console.instance;
+        return AppConsole.instance;
     }
 
     public getProgram() {
