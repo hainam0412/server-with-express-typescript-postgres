@@ -17,7 +17,7 @@ export class CreateModuleProcessor {
             for (const folder of this.baseModuleFolders) {
                 const folderName = this.folderPath(moduleName, folder);
                 fs.mkdirSync(folderName);
-                fs.appendFileSync(`${folderName}/${moduleName}.${folder}.ts`, await this.getSkeletonTemplate(folder));
+                fs.appendFileSync(`${folderName}/${moduleName}.${folder}.ts`, await this.getSkeletonTemplate(moduleName, folder));
             }
         } catch (error) {
             throw error;
@@ -28,7 +28,7 @@ export class CreateModuleProcessor {
         return `${this.moduleDirPath}/${moduleName}/${folderName}`;
     }
 
-    private async getSkeletonTemplate(folder: string) {
+    private async getSkeletonTemplate(moduleName: string, folder: string) {
         const filePath = `${this.moduleDirPath}/command/skeleton/module/${folder}.txt`;
         const fileExists = fs.existsSync(filePath);
         let data = '';
@@ -38,7 +38,8 @@ export class CreateModuleProcessor {
                 data = fs.readFileSync(filePath, {
                     encoding: 'utf8',
                 });
-                data.replace(/__module__/g, folder).replace(/__Module__/g, this.stringMapper.toPascalCase(folder));
+                data = this.stringMapper.replaceAll(data, '__module__', moduleName);
+                data = this.stringMapper.replaceAll(data, '__Module__', this.stringMapper.toPascalCase(moduleName));
             } catch (error) {
                 throw error;
             }
